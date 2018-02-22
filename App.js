@@ -5,6 +5,8 @@ import { StyleSheet, View } from 'react-native';
 // Components
 import PlaceInput from './src/PlaceInput';
 import PlaceList from './src/PlaceList';
+// Image
+import placeImage from './src/assets/asus-screen.jpg';
 
 export default class App extends React.Component {
   state = {
@@ -14,7 +16,11 @@ export default class App extends React.Component {
   addPlaceNameHandler = placeName => {
     if(placeName.trim() === "") return;
     this.setState(prevState => ({
-      places: prevState.places.concat({ value: placeName, key: Math.random() }),
+      places: prevState.places.concat({
+        name: placeName,
+        image: placeImage,
+        key: Math.random()
+      }),
     }));
   };
 
@@ -26,6 +32,8 @@ export default class App extends React.Component {
  
 
   render() {
+
+    // const a = placeImage;
 
     return (
       <View style={styles.container}>

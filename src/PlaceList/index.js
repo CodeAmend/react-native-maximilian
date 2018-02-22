@@ -12,7 +12,8 @@ const PlaceList = props =>
     data={props.places}
     renderItem={(info) => (
       <ListItem
-        name={info.item.value}
+        name={info.item.name}
+        image={info.item.image}
         onItemPressed={() => props.onSubmitRemoval(info.item.key)}
       />
     )}
