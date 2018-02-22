@@ -14,13 +14,13 @@ export default class App extends React.Component {
   addPlaceNameHandler = placeName => {
     if(placeName.trim() === "") return;
     this.setState(prevState => ({
-      places: prevState.places.concat(placeName),
+      places: prevState.places.concat({ value: placeName, key: Math.random() }),
     }));
   };
 
-  handlePlaceRemoval = index => {
+  handlePlaceRemoval = key => {
     this.setState(prevState => ({
-      places: prevState.places.filter((_, i) => index !== i)
+      places: prevState.places.filter(place => place.key !== key)
     }));
   };
  
