@@ -12,9 +12,9 @@ const PlaceList = props =>
     data={props.places}
     renderItem={(info) => (
       <ListItem
-        name={info.item.name}
+        name={info.item.title}
         image={info.item.image}
-        onItemPressed={() => props.onSubmitRemoval(info.item.key)}
+        onItemPressed={() => props.onSelectedPlace(info.item.key)}
       />
     )}
   />;

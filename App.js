@@ -5,29 +5,42 @@ import { StyleSheet, View } from 'react-native';
 // Components
 import PlaceInput from './src/PlaceInput';
 import PlaceList from './src/PlaceList';
-// Image
-import placeImage from './src/assets/asus-screen.jpg';
+import PlaceDetail from './src/PlaceDetail';
 
 export default class App extends React.Component {
   state = {
     places: [],
+    selectedPlace: null,
   };
 
   addPlaceNameHandler = placeName => {
     if(placeName.trim() === "") return;
     this.setState(prevState => ({
       places: prevState.places.concat({
-        name: placeName,
-        image: placeImage,
+        title: placeName,
+        image: {
+          uri: "http://im-possible.info/images/articles/the-eye-beguiled/5/44.jpg"
+        },
         key: Math.random()
       }),
     }));
   };
 
-  handlePlaceRemoval = key => {
+  handleSelectedPlace = key => {
     this.setState(prevState => ({
-      places: prevState.places.filter(place => place.key !== key)
+      selectedPlace: prevState.places.find(place => place.key !== key)
     }));
+  };
+
+  onPlaceClosedHandler = () => {
+    this.setState({ selectedPlace: null });
+  };
+
+  onPlaceDeletedHandler = () => {
+    this.setState(prevState => ({
+      places: prevState.places.filter(place => place.key !== prevState.selectedPlace.key),
+      selectedPlace: null,
+    }))
   };
  
 
@@ -37,12 +50,17 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
+        <PlaceDetail
+          selectedPlace={this.state.selectedPlace}
+          onPlaceDeleted={this.onPlaceDeletedHandler}
+          onPlaceClosed={this.onPlaceClosedHandler}
+        />
         <PlaceInput
           onSubmitPlaceName={this.addPlaceNameHandler}
         />
         <PlaceList
           places={this.state.places}
-          onSubmitRemoval={this.handlePlaceRemoval}
+          onSelectedPlace={this.handleSelectedPlace}
         />
       </View>
     );
