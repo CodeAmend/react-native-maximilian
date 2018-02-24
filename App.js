@@ -27,8 +27,9 @@ export default class App extends React.Component {
   };
 
   handleSelectedPlace = key => {
+    console.log(key);
     this.setState(prevState => ({
-      selectedPlace: prevState.places.find(place => place.key !== key)
+      selectedPlace: prevState.places.find(place => place.key === key)
     }));
   };
 

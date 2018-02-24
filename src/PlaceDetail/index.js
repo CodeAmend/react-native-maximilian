@@ -1,8 +1,9 @@
 // Modules
 import React from 'react';
 // React Native Modules
-import { StyleSheet, View, Button, Image, Text, Modal } from 'react-native';
-
+import { StyleSheet, View, Button, Image, Text, Modal, TouchableOpacity } from 'react-native';
+// 3rd Party
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const PlaceDetail = props => {
   let { selectedPlace } = props;
@@ -13,11 +14,15 @@ const PlaceDetail = props => {
     <Modal
       visible={props.selectedPlace !== null}
       animationType="slide"
+      onRequestClose={props.onPlaceDeleted}
     >
       <Text style={styles.placeTitle}>{selectedPlace.title}</Text>
       <Image style={styles.placeImage} source={selectedPlace.image} />
       <View>
-        <Button title="Delete" color="red" onPress={props.onPlaceDeleted} />
+        <TouchableOpacity onPress={props.onPlaceDeleted} style={{ alignItems: "center"}} >
+          <Icon size={30} color="red" name="ios-trash" />
+        </TouchableOpacity>
+        {/*<Button title="Delete" color="red" onPress={props.onPlaceDeleted} />*/}
         <Button title="Close" onPress={props.onPlaceClosed} />
       </View>
     </Modal>
