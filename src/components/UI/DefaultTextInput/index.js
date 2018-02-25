@@ -5,7 +5,7 @@ const DefaultTextInput = props =>
   <TextInput
     style={styles.input}
     underlineColorAndroid="transparent"
-    placeholder={props.placeholder}
+    {...props}
   />
 
 const styles = StyleSheet.create({
