@@ -6,11 +6,20 @@ import { View } from 'react-native';
 import PlaceList from '../../PlaceList';
 
 class FindPlace extends Component {
+  handleSelectedPlace = key => {
+    const selectedPlace = this.props.places.find(place => place.key === key);
+    this.props.navigator.push({
+      screen: "awesome-places.PlaceDetailScreen",
+      title: "Place Details",
+      passProps: { selectedPlace }
+    })
+
+  };
 
   render() {
     return (
       <View>
-        <PlaceList places={this.props.places}/>
+        <PlaceList onSelectedPlace={this.handleSelectedPlace} places={this.props.places}/>
       </View>
     );
   }

@@ -7,21 +7,28 @@ const store = configureStore();
 import AuthScreen from './src/screens/Auth';
 import SharePlaceScreen from './src/screens/SharePlace';
 import FindPlaceScreen from './src/screens/FindPlace';
+import PlaceDetailScreen from './src/screens/PlaceDetail';
 
 Navigation.registerComponent('awesome-places.AuthScreen',
   () => AuthScreen,
   store,
   Provider
 );
+
 Navigation.registerComponent('awesome-places.SharePlaceScreen',
   () => SharePlaceScreen,
   store,
   Provider
 );
+
 Navigation.registerComponent('awesome-places.FindPlaceScreen',
   () => FindPlaceScreen,
   store,
   Provider
+);
+
+Navigation.registerComponent('awesome-places.PlaceDetailScreen',
+  () => PlaceDetailScreen,
 );
 
 Navigation.startSingleScreenApp({
