@@ -1,47 +1,34 @@
 // Modules
 import React from 'react';
+import { connect } from 'react-redux';
 // React Native
 import { StyleSheet, View } from 'react-native';
 // Components
 import PlaceInput from './src/PlaceInput';
 import PlaceList from './src/PlaceList';
 import PlaceDetail from './src/PlaceDetail';
+import { addPlace, deletePlace, selectPlace, deselectPlace } from "./src/store/actions";
 
-export default class App extends React.Component {
+class App extends React.Component {
   state = {
     places: [],
     selectedPlace: null,
   };
 
   addPlaceNameHandler = placeName => {
-    if(placeName.trim() === "") return;
-    this.setState(prevState => ({
-      places: prevState.places.concat({
-        title: placeName,
-        image: {
-          uri: "http://im-possible.info/images/articles/the-eye-beguiled/5/44.jpg"
-        },
-        key: Math.random()
-      }),
-    }));
+    this.props.onAddPlace(placeName);
   };
 
   handleSelectedPlace = key => {
-    console.log(key);
-    this.setState(prevState => ({
-      selectedPlace: prevState.places.find(place => place.key === key)
-    }));
+    this.props.onSelectPlace(key);
   };
 
   onPlaceClosedHandler = () => {
-    this.setState({ selectedPlace: null });
+    this.props.onDeselectPlace();
   };
 
   onPlaceDeletedHandler = () => {
-    this.setState(prevState => ({
-      places: prevState.places.filter(place => place.key !== prevState.selectedPlace.key),
-      selectedPlace: null,
-    }))
+    this.props.onDeletePlace();
   };
  
 
@@ -52,7 +39,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <PlaceDetail
-          selectedPlace={this.state.selectedPlace}
+          selectedPlace={this.props.selectedPlace}
           onPlaceDeleted={this.onPlaceDeletedHandler}
           onPlaceClosed={this.onPlaceClosedHandler}
         />
@@ -60,7 +47,7 @@ export default class App extends React.Component {
           onSubmitPlaceName={this.addPlaceNameHandler}
         />
         <PlaceList
-          places={this.state.places}
+          places={this.props.places}
           onSelectedPlace={this.handleSelectedPlace}
         />
       </View>
@@ -77,3 +64,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 });
+
+const mapStateToProps = state => ({
+  places: state.places.places,
+  selectedPlace: state.places.selectedPlace,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onAddPlace: (name) => dispatch(addPlace(name)),
+  onDeletePlace: () => dispatch(deletePlace()),
+  onSelectPlace: (key) => dispatch(selectPlace(key)),
+  onDeselectPlace: () => dispatch(deselectPlace()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
