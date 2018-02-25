@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+
+import { addPlace } from '../../store/actions';
+
+import PlaceInput from '../../PlaceInput';
+
 
 class SharePlace extends Component {
 
   render() {
     return (
       <View>
-        <Text>On SharePlace Screen</Text>
+        <PlaceInput onSubmitPlaceName={this.props.submitPlaceName} />
       </View>
     )
   }
 }
 
-export default SharePlace;
+const dispatchStateToProps = dispatch => ({
+  submitPlaceName: (placeName) => dispatch(addPlace(placeName))
+});
+
+export default connect(null, dispatchStateToProps)(SharePlace);
