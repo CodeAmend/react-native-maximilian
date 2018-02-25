@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { View } from 'react-native';
 
-import PlaceList from '../../PlaceList';
+import PlaceList from '../../components/PlaceList';
 
 class FindPlace extends Component {
   handleSelectedPlace = key => {

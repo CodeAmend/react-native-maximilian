@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { addPlace } from '../../store/actions';
 
-import PlaceInput from '../../PlaceInput';
+import PlaceInput from '../../components/PlaceInput';
 
 
 class SharePlace extends Component {
