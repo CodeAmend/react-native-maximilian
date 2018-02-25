@@ -29,6 +29,8 @@ Navigation.registerComponent('awesome-places.FindPlaceScreen',
 
 Navigation.registerComponent('awesome-places.PlaceDetailScreen',
   () => PlaceDetailScreen,
+  store,
+  Provider
 );
 
 Navigation.startSingleScreenApp({
