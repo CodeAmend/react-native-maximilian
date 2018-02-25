@@ -4,11 +4,11 @@ import { Text, StyleSheet } from 'react-native';
 const HeadingText = props =>
   <Text
     {...props}
-    style={[styles.text, props.style]}
+    style={[styles.textHeading, props.style]}
   />;
 
 const styles = StyleSheet.create({
-  text: {
+  textHeading: {
     fontSize: 28,
     fontWeight: "bold"
   }

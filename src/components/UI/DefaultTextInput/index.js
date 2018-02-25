@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
     width: "100%",
     borderColor: "#eee",
     borderWidth: 1,
+    padding: 5,
+    margin: 8
   }
 });
 
