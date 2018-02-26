@@ -7,6 +7,7 @@ import MainText from '../../components/UI/MainText';
 import HeadingText from '../../components/UI/HeadingText';
 
 import backgroundImage from '../../assets/background.jpg';
+import DefaultButton from "../../components/UI/DefaultButton";
 
 const AuthScreen = () => {
   const handleLogin = () => {
@@ -19,12 +20,13 @@ const AuthScreen = () => {
         <MainText>
           <HeadingText>Please Log in</HeadingText>
         </MainText>
+        <DefaultButton onPress={handleLogin} color="#23aaf4">Switch Login</DefaultButton>
         <View style={styles.inputContainer}>
           <DefaultTextInput placeholder="You're Email Address" style={styles.input}/>
           <DefaultTextInput placeholder="Password" style={styles.input}/>
           <DefaultTextInput placeholder="Confirm Password" style={styles.input}/>
         </View>
-        <Button title="Login" onPress={handleLogin}/>
+        <DefaultButton onPress={handleLogin} color="#23aaf4">Log in</DefaultButton>
       </View>
     </ImageBackground>
   )
